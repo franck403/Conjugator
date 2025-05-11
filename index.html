@@ -75,20 +75,7 @@
     let allVerbs = ["être", "avoir", "aller", "faire", "manger", "finir", "prendre", "venir", "voir"];
 
     async function fetchConjugation(verb, tense) {
-      const url = `http://www.verbix.com/webverbix/french/${verb}.html`;
-
-      try {
-        const response = await fetch(`https://tabproxy.com/${encodeURIComponent(url)}`);
-        if (!response.ok) throw new Error("Erreur réseau");
-        const body = await response.text();
-
-        // Process the HTML as in your previous script with Verbix.js parsing functions
-        const result = await conjugate('french', verb);
-        return result[tense] || ["Temps non trouvé."];
-      } catch (err) {
-        console.error('Error fetching conjugation:', err);
-        return ["Erreur de chargement"];
-      }
+      return await conjugate('french', verb)
     }
 
     async function renderVerbs() {
